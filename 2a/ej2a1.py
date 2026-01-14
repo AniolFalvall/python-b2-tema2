@@ -24,10 +24,12 @@ import numpy as np
 
 
 def simulate_dice_rolls(number: int) -> dict:
-    # Write here your code
+    results = np.random.randint(1, 7, size=number)
+    probabilities = {i: np.sum(results == i) / number for i in range(1, 7)}
+    return probabilities
     pass
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
-# num_rolls = 10000
-# print(simulate_dice_rolls(num_rolls))
+num_rolls = 10000
+print(simulate_dice_rolls(num_rolls))

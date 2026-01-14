@@ -45,29 +45,30 @@ from pathlib import Path
 
 
 def read_json_basic(file_path: str) -> pd.DataFrame:
-    # Write here your code
+    return pd.read_json(file_path, lines=True)
     pass
 
 
 def read_json_with_orientation(file_path: str, orient: str) -> pd.DataFrame:
-    # Write here your code
+    return pd.read_json(file_path, orient=orient)
     pass
 
 def read_json_and_normalize(file_path: str, record_path: t.List[str]) -> pd.DataFrame:
-    # Write here your code
+    json_data = pd.read_json(file_path)
+    return pd.json_normalize(json_data[record_path[0]])
     pass
 
 # Para probar el código, descomenta las siguientes líneas
-# current_dir = Path(__file__).parent
-# json_basic_path = current_dir / "data/ej2b2/ramen-ratings.json"
-# json_orient_path = current_dir / "data/ej2b2/ramen-ratings-records.json"
-# json_table_oriented_path = current_dir / "data/ej2b2/ramen-ratings-table.json"
-# json_normalize_path = current_dir / "data/ej2b2/ramen-ratings-nested.json"
+current_dir = Path(__file__).parent
+json_basic_path = current_dir / "data/ej2b2/ramen-ratings.json"
+json_orient_path = current_dir / "data/ej2b2/ramen-ratings-records.json"
+json_table_oriented_path = current_dir / "data/ej2b2/ramen-ratings-table.json"
+json_normalize_path = current_dir / "data/ej2b2/ramen-ratings-nested.json"
 
-# df_basic = read_json_basic(json_basic_path)
-# df_orient = read_json_with_orientation(json_orient_path, orient="records")
-# df_table_oriented = read_json_with_orientation(json_table_oriented_path, orient="table")
-# df_normalized = read_json_and_normalize(json_normalize_path, record_path=["data"])
+df_basic = read_json_basic(json_basic_path)
+df_orient = read_json_with_orientation(json_orient_path, orient="records")
+df_table_oriented = read_json_with_orientation(json_table_oriented_path, orient="table")
+df_normalized = read_json_and_normalize(json_normalize_path, record_path=["data"])
 
-# # Mostrar los primeros registros de cada DataFrame
-# print(df_basic.head(), df_orient.head(), df_table_oriented.head(), df_normalized.head())
+# Mostrar los primeros registros de cada DataFrame
+print(df_basic.head(), df_orient.head(), df_table_oriented.head(), df_normalized.head())
